@@ -44,13 +44,13 @@ public class MathTest {
                 {Double.MAX_VALUE, 1.79769, -11.0},
                 {1.0, 4.0, 4.0},
                 {-1.0, 4.0, -1.0},
-                {4.0, -1.0, "one"}
+                {4.0, -1.0, -5.3}
         };
     }
     //сложение с ошибкой
     @Test(dataProvider = "testSumNotEquals")
     public void testSumNotEquals(Object one, Double two, Double tree) {
-        Assert.assertEquals(one, new Math().sumTest(two,tree),"Значения не равны!");
+        Assert.assertNotEquals(one, new Math().sumTest(two,tree),"Значения не равны!");
     }
 //----------------------------------------------------------------------вычитание
 @DataProvider
@@ -73,16 +73,16 @@ public Object[][] testSubEquals() {
     public Object[][] testSubNotEquals() {
         return new Object[][]{
                 {0.0, 4.0, 1.0},
-                {4.0, -1.0, 1.0},
-                {1.0, 4.0, 4.0},
+                {4.0, -1.2, 1.0},
+                {1.3, 4.0, 4.0},
                 {-1.0, 4.0, -1.0},
-                {-1.0, "/werw&&", 4.0},
+                {-1.0, 8.4, 4.0},
         };
     }
     //вычитание с ошибкой
     @Test(dataProvider = "testSubNotEquals")
     public void testSubNotEquals(Object one, Double two, Double tree) {
-        Assert.assertEquals(one, new Math().subTest(two,tree), "Значения не равны!");
+        Assert.assertNotEquals(one, new Math().subTest(two,tree), "Значения не равны!");
     }
     //----------------------------------------------------------------------умножение
     @DataProvider
@@ -104,17 +104,17 @@ public Object[][] testSubEquals() {
     @DataProvider
     public Object[][] testMultNotEquals() {
         return new Object[][]{
-                {0.0, 4.0, 1.0},
-                {4.0, -1.0, 1.0},
-                {1.0, 4.0, 4.0},
-                {-1.0, 4.0, -1.0},
-                {-1.0, 4.0, "тристатыщ"},
+                {"five", 2, 2},
+                {1, -1, "one"},
+                {100, "four", 4},
+                {"seven", "0", -1},
+                {3, "zero", 3}
         };
     }
     //умножение с ошибкой
-    @Test(dataProvider = "testMultNotEquals")
-    public void testMultNotEquals(Object one, Double two, Double tree) {
-        Assert.assertEquals(one, new Math().multTest(two,tree), "Значения не равны!");
+    @Test(dataProvider = "testMultNotEquals", expectedExceptions = {ClassCastException.class})
+    public void testMultNotEquals(Object one, Object two, Object tree) {
+        Assert.assertNotEquals(one, new Math().multTest(two,tree), "Значения не равны!");
     }
     //----------------------------------------------------------------------деление
     @DataProvider
@@ -146,6 +146,7 @@ public Object[][] testSubEquals() {
     //деление с ошибкой
     @Test(dataProvider = "testDivNotEquals")
     public void testDivNotEquals(Object one, Double two, Double tree) {
-        Assert.assertEquals(one, new Math().divTest(two,tree), "Значения не равны!");
+        Assert.assertNotEquals(one, new Math().divTest(two,tree), "Значения не равны!");
     }
+
 }
